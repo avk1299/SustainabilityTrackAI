@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SustainTrack - AI Sustainability Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="sidebar-header">
+                <span class="logo-emoji">🌿</span>
+                <div class="brand-group">
+                    <h1 class="brand-name">SustainTrack</h1>
+                    <span class="badge-ai">AI Companion</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul class="nav-menu-list">
+                    <li class="active" data-tab="dashboard" id="nav-btn-dashboard">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">Dashboard</span>
+                    </li>
+                    <li data-tab="tracker" id="nav-btn-tracker">
+                        <span class="nav-icon">✍️</span>
+                        <span class="nav-text">Track Habits</span>
+                    </li>
+                    <li data-tab="recommendations" id="nav-btn-recommendations">
+                        <span class="nav-icon">🎯</span>
+                        <span class="nav-text">Action Hub</span>
+                    </li>
+                    <li data-tab="simulator" id="nav-btn-simulator">
+                        <span class="nav-icon">🎛️</span>
+                        <span class="nav-text">What-If Simulator</span>
+                    </li>
+                    <li data-tab="ai-chat" id="nav-btn-chat">
+                        <span class="nav-icon">✨</span>
+                        <span class="nav-text">Ask AI Agent</span>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="profile-card">
+                    <div class="profile-avatar">🌱</div>
+                    <div class="profile-details">
+                        <span class="profile-name">Eco Explorer</span>
+                        <span class="profile-level">Sustainer Lv. 2</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Panel Views -->
+        <main class="app-main-content">
+            <!-- 1. DASHBOARD VIEW -->
+            <section class="app-view-panel active" id="view-dashboard">
+                <header class="view-header">
+                    <div>
+                        <h2>Welcome Back, Explorer!</h2>
+                        <p class="subtitle">Here is a continuous digest of your ecological footprints and utility savings.</p>
+                    </div>
+                </header>
+
+                <div class="dashboard-grid">
+                    <!-- Global Eco Score -->
+                    <div class="grid-card score-card span-2">
+                        <div class="score-radial-container">
+                            <svg class="score-ring-svg" viewBox="0 0 120 120">
+                                <circle class="score-ring-bg" cx="60" cy="60" r="54"></circle>
+                                <circle class="score-ring-value" cx="60" cy="60" r="54" id="score-ring-circle"></circle>
+                            </svg>
+                            <div class="score-label-group">
+                                <span class="score-num" id="sustainability-score">85</span>
+                                <span class="score-lbl">Eco Score</span>
+                            </div>
+                        </div>
+                        <div class="score-summary">
+                            <h3>Sustainability Standing</h3>
+                            <p>Based on your logged habits, your resource consumption compared to standard sustainable guidelines is:</p>
+                            <span class="status-badge" id="sustainability-status">Sustainable Citizen</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Counters -->
+                    <div class="grid-card metric-card card-carbon">
+                        <div class="metric-header">
+                            <span class="metric-title">Carbon Footprint</span>
+                            <span class="metric-icon">🌿</span>
+                        </div>
+                        <div class="metric-value" id="dash-carbon-today">0.0 kg</div>
+                        <div class="metric-comparison">Weekly average: <strong id="dash-carbon-weekly">8.2 kg/day</strong></div>
+                    </div>
+
+                    <div class="grid-card metric-card card-cost">
+                        <div class="metric-header">
+                            <span class="metric-title">Resource Costs</span>
+                            <span class="metric-icon">💰</span>
+                        </div>
+                        <div class="metric-value" id="dash-cost-today">$0.00</div>
+                        <div class="metric-comparison">Weekly average: <strong id="dash-cost-weekly">$25.10/wk</strong></div>
+                    </div>
+
+                    <div class="grid-card metric-card card-water">
+                        <div class="metric-header">
+                            <span class="metric-title">Water Volume</span>
+                            <span class="metric-icon">💧</span>
+                        </div>
+                        <div class="metric-value" id="dash-water-today">0 L</div>
+                        <div class="metric-comparison">Weekly average: <strong id="dash-water-weekly">165 L/day</strong></div>
+                    </div>
+
+                    <div class="grid-card metric-card card-elec">
+                        <div class="metric-header">
+                            <span class="metric-title">Electricity Spent</span>
+                            <span class="metric-icon">⚡</span>
+                        </div>
+                        <div class="metric-value" id="dash-elec-today">0.0 kWh</div>
+                        <div class="metric-comparison">Weekly average: <strong id="dash-elec-weekly">11.4 kWh/day</strong></div>
+                    </div>
+
+                    <!-- Charts Visualization -->
+                    <div class="grid-card chart-card span-3">
+                        <div class="chart-header">
+                            <h3>Weekly Resource Logging Analysis</h3>
+                            <div class="dash-chart-filter">
+                                <button class="btn btn-chart-filter active" data-category="carbon">CO₂</button>
+                                <button class="btn btn-chart-filter" data-category="electricity">Power</button>
+                                <button class="btn btn-chart-filter" data-category="water">Water</button>
+                                <button class="btn btn-chart-filter" data-category="waste">Waste</button>
+                            </div>
+                        </div>
+                        <div class="chart-canvas-container" id="dashboard-chart-container">
+                            <!-- Injected SVG elements from dashboard.js -->
+                        </div>
+                    </div>
+
+                    <!-- Targets Circular meters -->
+                    <div class="grid-card targets-card span-2">
+                        <h3>Resource Efficiency Targets</h3>
+                        <div class="rings-grid">
+                            <div class="ring-metric">
+                                <svg viewBox="0 0 80 80">
+                                    <circle class="ring-bg" cx="40" cy="40" r="36"></circle>
+                                    <circle class="ring-value" cx="40" cy="40" r="36" id="ring-elec-circle"></circle>
+                                </svg>
+                                <div class="ring-percentage" id="ring-elec-text">80%</div>
+                                <span class="ring-label">Electricity</span>
+                            </div>
+                            
+                            <div class="ring-metric">
+                                <svg viewBox="0 0 80 80">
+                                    <circle class="ring-bg" cx="40" cy="40" r="36"></circle>
+                                    <circle class="ring-value" cx="40" cy="40" r="36" id="ring-water-circle"></circle>
+                                </svg>
+                                <div class="ring-percentage" id="ring-water-text">95%</div>
+                                <span class="ring-label">Water</span>
+                            </div>
+
+                            <div class="ring-metric">
+                                <svg viewBox="0 0 80 80">
+                                    <circle class="ring-bg" cx="40" cy="40" r="36"></circle>
+                                    <circle class="ring-value" cx="40" cy="40" r="36" id="ring-waste-circle"></circle>
+                                </svg>
+                                <div class="ring-percentage" id="ring-waste-text">45%</div>
+                                <span class="ring-label">Waste</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Habit Logs -->
+                    <div class="grid-card logs-card span-3">
+                        <div class="card-header-row">
+                            <h3>Recent Logs</h3>
+                        </div>
+                        <ul class="logs-list-element" id="recent-logs-list">
+                            <!-- Injected from dashboard.js -->
+                        </ul>
+                    </div>
+
+                    <!-- Badges / Achievements -->
+                    <div class="grid-card badges-card span-5">
+                        <h3>Eco Achievements & Badges</h3>
+                        <div class="badges-grid" id="dashboard-badges-grid">
+                            <!-- Injected from dashboard.js -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. HABITS TRACKING VIEW -->
+            <section class="app-view-panel" id="view-tracker">
+                <header class="view-header">
+                    <h2>Track Daily Habits</h2>
+                    <p class="subtitle">Continuously log energy, water, waste, and transport choices to track daily environmental impact.</p>
+                </header>
+
+                <div class="tracker-layout">
+                    <div class="tracker-form-card">
+                        <div class="tracker-form-tabs">
+                            <button class="btn-tab active" data-category="electricity">🔌 Electricity</button>
+                            <button class="btn-tab" data-category="water">💧 Water</button>
+                            <button class="btn-tab" data-category="waste">🗑️ Waste</button>
+                            <button class="btn-tab" data-category="transport">🚗 Transport</button>
+                        </div>
+                        
+                        <form id="habit-log-form" class="tracker-form">
+                            <div class="form-group inline-row">
+                                <div class="flex-item">
+                                    <label for="log-date-picker">Log Date</label>
+                                    <input type="date" id="log-date-picker" class="form-input">
+                                </div>
+                            </div>
+
+                            <div id="tracker-dynamic-inputs">
+                                <!-- Injected dynamic fields based on active tab -->
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Add Log Entry</button>
+                        </form>
+                    </div>
+
+                    <!-- Immediate Impact Preview Widget -->
+                    <div class="tracker-preview-card">
+                        <h3>Simulated Entry Impact</h3>
+                        <div class="preview-stat-grid">
+                            <div class="preview-stat-box">
+                                <span class="preview-lbl">Estimated Carbon Cost</span>
+                                <span class="preview-val" id="preview-impact-co2">0.0 kg CO₂</span>
+                            </div>
+                            <div class="preview-stat-box">
+                                <span class="preview-lbl">Estimated Money Spent</span>
+                                <span class="preview-val" id="preview-impact-cost">$0.00</span>
+                            </div>
+                        </div>
+                        <div class="preview-infobox">
+                            <p>🍃 <strong>Why this matters:</strong> Every entry is logged into your weekly profile. The AI agent evaluates these figures to curate optimization advices and compute your Sustainability Score.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. ACTION HUB (RECOMMENDATIONS) VIEW -->
+            <section class="app-view-panel" id="view-recommendations">
+                <header class="view-header">
+                    <h2>Action Hub & Recommendations</h2>
+                    <p class="subtitle">Accept actions to optimize your utility savings and shrink your global carbon footprint.</p>
+                </header>
+
+                <div class="recommendations-grid-layout" id="recommendations-grid">
+                    <!-- Injected cards from app.js -->
+                </div>
+            </section>
+
+            <!-- 4. WHAT-IF ECO SIMULATOR VIEW -->
+            <section class="app-view-panel" id="view-simulator">
+                <header class="view-header">
+                    <h2>"What-If" Ecological Simulator</h2>
+                    <p class="subtitle">Adjust sliders to model lifestyle adjustments and discover the annual compound savings.</p>
+                </header>
+
+                <div class="simulator-layout">
+                    <!-- Sliders controls -->
+                    <div class="simulator-panel-card">
+                        <h3>Model Lifestyle Choices</h3>
+                        
+                        <div class="simulator-control">
+                            <div class="control-header">
+                                <label for="sim-heating">Home Heating Type</label>
+                                <span class="control-val-tag" id="sim-heating-val">Gas</span>
+                            </div>
+                            <select id="sim-heating" class="form-input">
+                                <option value="gas">Gas Furnace (Standard)</option>
+                                <option value="electric">Electric Radiator</option>
+                                <option value="heatpump">Energy-Efficient Heat Pump</option>
+                            </select>
+                        </div>
+
+                        <div class="simulator-control">
+                            <div class="control-header">
+                                <label for="sim-shower">Average Shower Duration</label>
+                                <span class="control-val-tag" id="sim-shower-val">10 min</span>
+                            </div>
+                            <input type="range" id="sim-shower" min="3" max="15" value="10" step="1" class="slider-range">
+                        </div>
+
+                        <div class="simulator-control">
+                            <div class="control-header">
+                                <label for="sim-lights">Lighting Setup</label>
+                                <span class="control-val-tag" id="sim-lights-val">0% LED</span>
+                            </div>
+                            <input type="range" id="sim-lights" min="0" max="100" value="0" step="10" class="slider-range">
+                        </div>
+
+                        <div class="simulator-control">
+                            <div class="control-header">
+                                <label for="sim-travel">Daily Travel Mileage</label>
+                                <span class="control-val-tag" id="sim-travel-val">20 mi/day</span>
+                            </div>
+                            <input type="range" id="sim-travel" min="0" max="80" value="20" step="5" class="slider-range">
+                        </div>
+
+                        <div class="simulator-control">
+                            <div class="control-header">
+                                <label for="sim-travel-mode">Commuting Vehicle Mode</label>
+                            </div>
+                            <select id="sim-travel-mode" class="form-input">
+                                <option value="gas">Gasoline Passenger Car</option>
+                                <option value="EV">Electric Car (EV)</option>
+                                <option value="public">Public Bus / Subway</option>
+                                <option value="active">Active Walk / Cycling</option>
+                            </select>
+                        </div>
+
+                        <div class="simulator-control">
+                            <div class="control-header">
+                                <label for="sim-meat">Weekly Meat Meals</label>
+                                <span class="control-val-tag" id="sim-meat-val">14 meals/wk</span>
+                            </div>
+                            <input type="range" id="sim-meat" min="0" max="21" value="14" step="1" class="slider-range">
+                        </div>
+                    </div>
+
+                    <!-- Simulator Results -->
+                    <div class="simulator-results-card">
+                        <h3>Simulated Annual Impact</h3>
+                        <div class="sim-metric-group">
+                            <div class="sim-output-box border-emerald">
+                                <span class="sim-lbl">Annual Carbon Cut</span>
+                                <span class="sim-val" id="sim-co2-saved">0 kg</span>
+                                <div class="sim-progress-bg">
+                                    <div class="sim-progress-fill bg-emerald" id="sim-carbon-progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="sim-output-box border-cash">
+                                <span class="sim-lbl">Annual Dollars Saved</span>
+                                <span class="sim-val" id="sim-cost-saved">$0</span>
+                                <div class="sim-progress-bg">
+                                    <div class="sim-progress-fill bg-cash" id="sim-cost-progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sim-analogy-box">
+                            <div class="analogy-icon">🌳</div>
+                            <div class="analogy-text">
+                                <h4>Carbon Sink Analogy</h4>
+                                <p>Your simulated changes offset emission equivalent to planting <strong id="sim-trees-planted">0</strong> mature pine trees annually.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. ASK AI CHATBOT VIEW -->
+            <section class="app-view-panel" id="view-ai-chat">
+                <header class="view-header">
+                    <div class="flex-header-row">
+                        <div>
+                            <h2>Ask Sustaina (AI Companion)</h2>
+                            <p class="subtitle">Get contextual advice, footprint reports, and live sustainability tips.</p>
+                        </div>
+                        <button class="btn btn-outline" id="clear-chat-btn">Clear Chat History</button>
+                    </div>
+                </header>
+
+                <div class="chat-agent-interface">
+                    <!-- Messages Box -->
+                    <div class="chat-messages-box" id="chat-messages-container">
+                        <!-- Message bubble elements injected here from app.js -->
+                    </div>
+
+                    <!-- Input Section -->
+                    <div class="chat-input-bar">
+                        <input type="text" id="chat-input-box" placeholder="Ask Sustaina (e.g. 'How can I save water?' or 'Analyze my profile')..." class="form-input chat-input">
+                        <button class="btn btn-primary chat-btn-send" id="chat-send-btn">Send</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts Imports -->
+    <script src="js/data-store.js"></script>
+    <script src="js/ai-agent.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/tracker.js"></script>
+    <script src="js/simulator.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
