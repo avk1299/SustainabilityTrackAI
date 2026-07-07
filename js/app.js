@@ -404,16 +404,10 @@ class AppController {
                 const id = btn.dataset.id;
                 const rec = RECOMMENDATIONS_DB.find(r => r.id === id);
                 if (rec && window.dataStore.completeRecommendation(id)) {
-                    // Show animation / reload
                     this.renderRecommendations();
                     if (window.dashboardController) window.dashboardController.renderAll();
-                    
-                    // Alert success
-                    let toast = document.getElementById('tracker-toast');
-                    if (toast && window.trackerController) {
-                        window.trackerController.showToast(`Action Committed! +5 Sustainability Score points.`);
-                    } else {
-                        alert(`Action Committed! You earned +5 points.`);
+                    if (window.trackerController) {
+                        window.trackerController.showToast(`✅ Action committed! +50 XP earned.`);
                     }
                 }
             });

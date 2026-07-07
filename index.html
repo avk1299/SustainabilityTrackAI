@@ -338,7 +338,7 @@
                                     <div class="sim-progress-fill bg-emerald" id="sim-carbon-progress-bar" style="width: 0%"></div>
                                 </div>
                             </div>
-                            
+
                             <div class="sim-output-box border-cash">
                                 <span class="sim-lbl">Annual Dollars Saved</span>
                                 <span class="sim-val" id="sim-cost-saved">$0</span>
@@ -346,14 +346,24 @@
                                     <div class="sim-progress-fill bg-cash" id="sim-cost-progress-bar" style="width: 0%"></div>
                                 </div>
                             </div>
+
+                            <div class="sim-output-box border-monthly">
+                                <span class="sim-lbl">Monthly Savings Estimate</span>
+                                <span class="sim-val sim-val-small" id="sim-monthly-cost">$0/mo</span>
+                            </div>
                         </div>
 
                         <div class="sim-analogy-box">
                             <div class="analogy-icon">🌳</div>
                             <div class="analogy-text">
                                 <h4>Carbon Sink Analogy</h4>
-                                <p>Your simulated changes offset emission equivalent to planting <strong id="sim-trees-planted">0</strong> mature pine trees annually.</p>
+                                <p>Your choices offset emissions equal to planting <strong id="sim-trees-planted">0</strong> mature pine trees annually.</p>
                             </div>
+                        </div>
+
+                        <div class="sim-breakdown-section">
+                            <h4>CO₂ Breakdown by Source</h4>
+                            <ul class="sim-breakdown-list" id="sim-breakdown-list"></ul>
                         </div>
                     </div>
                 </div>

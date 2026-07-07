@@ -1450,3 +1450,232 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     gap: 20px;
 }
+
+/* -------------------------------------------------------
+   INLINE FORM ROW (Tracker date row)
+------------------------------------------------------- */
+.inline-row {
+    display: flex;
+    gap: 16px;
+}
+
+.flex-item {
+    flex: 1;
+}
+
+/* -------------------------------------------------------
+   TOAST VARIANTS
+------------------------------------------------------- */
+.toast-alert.toast-warning {
+    border-color: var(--yellow);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 10px var(--yellow-glow);
+}
+
+/* -------------------------------------------------------
+   TRACKER LOG HISTORY SECTION
+------------------------------------------------------- */
+.tracker-log-section {
+    margin-top: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.tracker-log-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tracker-log-header h3 {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.tracker-log-filter-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.btn-log-filter {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--text-muted);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-family: 'Outfit', sans-serif;
+}
+
+.btn-log-filter:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-primary);
+}
+
+.btn-log-filter.active {
+    background: var(--bg-light);
+    border-color: rgba(255,255,255,0.18);
+    color: var(--text-primary);
+}
+
+.btn-export-csv {
+    flex-shrink: 0;
+    margin-left: auto;
+    font-size: 12px;
+    padding: 7px 14px;
+}
+
+.tracker-log-item {
+    gap: 12px;
+}
+
+.tracker-log-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 32px;
+    flex-shrink: 0;
+}
+
+.tl-co2 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--emerald);
+}
+
+.tl-cost {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* -------------------------------------------------------
+   XP LEVEL BAR
+------------------------------------------------------- */
+.dashboard-xp-bar {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+}
+
+.xp-bar-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    margin-bottom: 8px;
+}
+
+.xp-label {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.xp-next {
+    color: var(--text-muted);
+}
+
+.xp-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.xp-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--cyan) 100%);
+    transition: width 0.6s ease;
+}
+
+/* -------------------------------------------------------
+   SIMULATOR: Monthly savings box + breakdown
+------------------------------------------------------- */
+.sim-output-box.border-monthly {
+    border-left: 4px solid var(--accent);
+}
+
+.sim-val-small {
+    font-size: 20px;
+}
+
+.sim-breakdown-section {
+    margin-top: 24px;
+}
+
+.sim-breakdown-section h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sim-breakdown-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sim-bd-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.sim-bd-label {
+    width: 110px;
+    flex-shrink: 0;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.sim-bd-bar-bg {
+    flex-grow: 1;
+    height: 5px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sim-bd-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--emerald) 0%, var(--cyan) 100%);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.sim-bd-val {
+    width: 90px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex-shrink: 0;
+}
+
+/* -------------------------------------------------------
+   BADGES GRID — 4 columns on large, 2 on small
+------------------------------------------------------- */
+.badges-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1280px) {
+    .badges-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
