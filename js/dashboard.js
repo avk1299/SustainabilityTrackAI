@@ -15,7 +15,7 @@ class DashboardController {
 
     setupEventListeners() {
         // Toggle filters on dashboard charts
-        const filters = document.querySelectorAll('.dash-chart-filter btn');
+        const filters = document.querySelectorAll('.dash-chart-filter .btn');
         filters.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 filters.forEach(f => f.classList.remove('active'));
@@ -38,29 +38,30 @@ class DashboardController {
         const nowStr = new Date().toISOString().split('T')[0];
         const today = window.dataStore.getTotalsForDate(nowStr);
         const weeklyAvg = window.dataStore.getWeeklyAverages();
-        
+
         // Sustainability Score (0-100)
         // Calculated based on deviation from daily targets
         let score = 100;
         const targets = DAILY_TARGETS;
-        
+
         const elecDev = Math.max(0, (weeklyAvg.electricity - targets.electricity) / targets.electricity);
         const waterDev = Math.max(0, (weeklyAvg.water - targets.water) / targets.water);
         const wasteDev = Math.max(0, (weeklyAvg.waste - targets.waste) / targets.waste);
         const carbonDev = Math.max(0, (weeklyAvg.carbon - targets.carbon) / targets.carbon);
-        
+
         // Deduct points for exceeding targets (max 25 pts deduction per category)
         score -= Math.min(25, elecDev * 25);
         score -= Math.min(25, waterDev * 25);
         score -= Math.min(25, wasteDev * 25);
         score -= Math.min(25, carbonDev * 25);
-        
+
         score = Math.max(10, Math.round(score));
-        
+        this.sustainabilityScore = score;
+
         // Update DOM elements
         const scoreEl = document.getElementById('sustainability-score');
         if (scoreEl) scoreEl.textContent = score;
-        
+
         const scoreRing = document.getElementById('score-ring-circle');
         if (scoreRing) {
             // Circumference of r=54 circle is ~339.29
@@ -80,7 +81,7 @@ class DashboardController {
             statusMsg = "Sustainable Citizen";
             statusColor = "var(--cyan)";
         }
-        
+
         const statusEl = document.getElementById('sustainability-status');
         if (statusEl) {
             statusEl.textContent = statusMsg;
@@ -90,13 +91,13 @@ class DashboardController {
         // Textual metrics
         document.getElementById('dash-carbon-today').textContent = today.carbon.toFixed(1) + " kg";
         document.getElementById('dash-carbon-weekly').textContent = weeklyAvg.carbon.toFixed(1) + " kg/day";
-        
+
         document.getElementById('dash-cost-today').textContent = "$" + today.cost.toFixed(2);
         document.getElementById('dash-cost-weekly').textContent = "$" + (weeklyAvg.cost * 7).toFixed(2) + "/wk";
-        
+
         document.getElementById('dash-water-today').textContent = Math.round(today.water) + " L";
         document.getElementById('dash-water-weekly').textContent = Math.round(weeklyAvg.water) + " L/day";
-        
+
         document.getElementById('dash-elec-today').textContent = today.electricity.toFixed(1) + " kWh";
         document.getElementById('dash-elec-weekly').textContent = weeklyAvg.electricity.toFixed(1) + " kWh/day";
     }
@@ -104,20 +105,20 @@ class DashboardController {
     renderRings() {
         const weeklyAvg = window.dataStore.getWeeklyAverages();
         const targets = DAILY_TARGETS;
-        
+
         const updateRing = (circleId, textId, value, target, unit) => {
             const circle = document.getElementById(circleId);
             const text = document.getElementById(textId);
             if (!circle || !text) return;
-            
+
             const percentage = Math.min(100, Math.round((value / target) * 100));
             // Circumference of r=36 circle is ~226.19
             const circum = 2 * Math.PI * 36;
             const offset = circum - (percentage / 100) * circum;
-            
+
             circle.style.strokeDasharray = `${circum} ${circum}`;
             circle.style.strokeDashoffset = offset;
-            
+
             // Adjust coloring based on threshold
             if (value > target * 1.2) {
                 circle.style.stroke = "var(--orange)";
@@ -126,7 +127,7 @@ class DashboardController {
             } else {
                 circle.style.stroke = "var(--yellow)";
             }
-            
+
             text.textContent = `${percentage}%`;
         };
 
@@ -144,7 +145,7 @@ class DashboardController {
         const labels = [];
         const now = new Date();
         const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        
+
         for (let i = 6; i >= 0; i--) {
             const d = new Date(now);
             d.setDate(now.getDate() - i);
@@ -180,7 +181,7 @@ class DashboardController {
 
         // Build SVG HTML
         let svg = `<svg viewBox="0 0 ${width} ${height}" class="custom-chart-svg" style="width: 100%; height: ${height}px;">`;
-        
+
         // Grid lines
         for (let i = 0; i <= 3; i++) {
             const y = padding + (graphHeight / 3) * i;
@@ -221,7 +222,7 @@ class DashboardController {
         dataset.forEach((val, idx) => {
             const x = padding + (idx * colWidth) + colWidth / 2;
             const y = padding + graphHeight - (val / maxVal) * graphHeight;
-            
+
             // Interactive circle dots
             svg += `
                 <circle cx="${x}" cy="${y}" r="4.5" fill="var(--bg-light)" stroke="${color}" stroke-width="2.5" class="chart-dot" />
@@ -237,15 +238,27 @@ class DashboardController {
     renderBadges() {
         const badgeGrid = document.getElementById('dashboard-badges-grid');
         if (!badgeGrid) return;
-        
+
         const habits = window.dataStore.getHabits();
         const completedRecs = window.dataStore.getCompletedRecommendations();
-        
+
+        // Dynamic Level / XP Calculation
+        const habitXP = habits.length * 15;
+        const recXP = completedRecs.length * 50;
+        const scoreXP = (this.sustainabilityScore || 85) > 80 ? 100 : 0;
+        const totalXP = habitXP + recXP + scoreXP;
+        const level = Math.max(1, Math.floor(totalXP / 100));
+
+        const lvlEl = document.getElementById('sidebar-profile-level');
+        if (lvlEl) {
+            lvlEl.textContent = `Sustainer Lv. ${level}`;
+        }
+
         // Calculate streaks & parameters
         const uniqueDates = [...new Set(habits.map(h => h.date))].sort();
         let currentStreak = 0;
         const todayStr = new Date().toISOString().split('T')[0];
-        
+
         // Quick streak estimation
         let activeCheck = new Date();
         for (let i = 0; i < 30; i++) {
@@ -307,7 +320,7 @@ class DashboardController {
     renderRecentLogs() {
         const list = document.getElementById('recent-logs-list');
         if (!list) return;
-        
+
         // Get last 4 logs, sorted by date & ID desc
         const sortedLogs = [...window.dataStore.getHabits()].sort((a, b) => {
             if (a.date !== b.date) return b.date.localeCompare(a.date);

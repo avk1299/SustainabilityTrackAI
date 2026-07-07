@@ -74,6 +74,7 @@ class AppController {
     init() {
         this.setupNavigation();
         this.setupChatUI();
+        this.setupProfileUI();
         this.renderRecommendations();
         
         // Initialize child controllers
@@ -86,6 +87,9 @@ class AppController {
         
         // Initial chat render
         this.renderChatHistory();
+        
+        // Initial profile display updates
+        this.updateProfileDisplay();
     }
 
     setupNavigation() {
@@ -105,6 +109,76 @@ class AppController {
         const picker = document.getElementById('log-date-picker');
         if (picker) {
             picker.value = new Date().toISOString().split('T')[0];
+        }
+    }
+
+    setupProfileUI() {
+        const profileCard = document.getElementById('sidebar-profile-card');
+        const modal = document.getElementById('profile-modal');
+        const closeBtn = document.getElementById('close-profile-modal');
+        const form = document.getElementById('profile-settings-form');
+        
+        if (profileCard && modal) {
+            profileCard.addEventListener('click', () => {
+                const profile = window.dataStore.getProfile();
+                document.getElementById('profile-input-name').value = profile.name || '';
+                document.getElementById('profile-input-goal').value = profile.sustainabilityGoal || 'reduce-carbon';
+                document.getElementById('profile-input-household').value = profile.householdSize || 1;
+                modal.classList.add('active');
+            });
+        }
+        
+        if (modal && closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
+        
+        if (form && modal) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('profile-input-name').value.trim();
+                const goal = document.getElementById('profile-input-goal').value;
+                const householdSize = parseInt(document.getElementById('profile-input-household').value) || 1;
+                
+                window.dataStore.updateProfile({
+                    name: name,
+                    sustainabilityGoal: goal,
+                    householdSize: householdSize
+                });
+                
+                this.updateProfileDisplay();
+                modal.classList.remove('active');
+                
+                // Show toast or trigger refresh
+                if (window.trackerController) {
+                    window.trackerController.showToast('Profile updated successfully!');
+                }
+                
+                // Refresh dashboard to apply changes
+                if (window.dashboardController) {
+                    window.dashboardController.renderAll();
+                }
+            });
+        }
+    }
+
+    updateProfileDisplay() {
+        const profile = window.dataStore.getProfile();
+        const sidebarName = document.getElementById('sidebar-profile-name');
+        const welcomeName = document.getElementById('dashboard-welcome-name');
+        
+        if (sidebarName) {
+            sidebarName.textContent = profile.name || 'Eco Explorer';
+        }
+        if (welcomeName) {
+            welcomeName.textContent = profile.name || 'Explorer';
         }
     }
 

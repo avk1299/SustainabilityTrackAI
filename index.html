@@ -47,11 +47,11 @@
             </nav>
             
             <div class="sidebar-footer">
-                <div class="profile-card">
+                <div class="profile-card" id="sidebar-profile-card">
                     <div class="profile-avatar">🌱</div>
                     <div class="profile-details">
-                        <span class="profile-name">Eco Explorer</span>
-                        <span class="profile-level">Sustainer Lv. 2</span>
+                        <span class="profile-name" id="sidebar-profile-name">Eco Explorer</span>
+                        <span class="profile-level" id="sidebar-profile-level">Sustainer Lv. 2</span>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
             <section class="app-view-panel active" id="view-dashboard">
                 <header class="view-header">
                     <div>
-                        <h2>Welcome Back, Explorer!</h2>
+                        <h2>Welcome Back, <span id="dashboard-welcome-name">Explorer</span>!</h2>
                         <p class="subtitle">Here is a continuous digest of your ecological footprints and utility savings.</p>
                     </div>
                 </header>
@@ -385,6 +385,35 @@
                 </div>
             </section>
         </main>
+    </div>
+    
+    <!-- Profile Settings Modal -->
+    <div id="profile-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Profile Settings</h3>
+                <button class="close-modal-btn" id="close-profile-modal">&times;</button>
+            </div>
+            <form id="profile-settings-form" class="modal-form">
+                <div class="form-group">
+                    <label for="profile-input-name">Eco Explorer Name</label>
+                    <input type="text" id="profile-input-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="profile-input-goal">Sustainability Focus Goal</label>
+                    <select id="profile-input-goal" class="form-input">
+                        <option value="reduce-carbon">Reduce Carbon Footprint</option>
+                        <option value="save-money">Save Utility Expenses</option>
+                        <option value="zero-waste">Minimize Waste (Zero Waste)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="profile-input-household">Household Size</label>
+                    <input type="number" id="profile-input-household" class="form-input" min="1" max="20" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Save Settings</button>
+            </form>
+        </div>
     </div>
 
     <!-- Scripts Imports -->

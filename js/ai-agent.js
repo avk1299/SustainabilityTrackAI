@@ -121,6 +121,55 @@ class AIAgent {
             return { reply, suggestions };
         }
 
+        // Check for suggestions or next action trigger
+        if (query.includes('next') || query.includes('should i do') || query.includes('recommend') || query.includes('suggest') || query.includes('action') || query.includes('hack')) {
+            const profile = dataStore.getProfile();
+            const goal = profile.sustainabilityGoal || 'reduce-carbon';
+            const completedRecs = dataStore.getCompletedRecommendations();
+            
+            // RECOMMENDATIONS_DB from app.js
+            const recsDB = typeof RECOMMENDATIONS_DB !== 'undefined' ? RECOMMENDATIONS_DB : [];
+            const uncompleted = recsDB.filter(r => !completedRecs.includes(r.id));
+            
+            let recommendedAction = null;
+            if (uncompleted.length > 0) {
+                if (goal === 'reduce-carbon') {
+                    uncompleted.sort((a, b) => b.co2Saved - a.co2Saved);
+                    recommendedAction = uncompleted[0];
+                } else if (goal === 'save-money') {
+                    uncompleted.sort((a, b) => b.moneySaved - a.moneySaved);
+                    recommendedAction = uncompleted[0];
+                } else if (goal === 'zero-waste') {
+                    const wasteRecs = uncompleted.filter(r => r.category === 'waste');
+                    if (wasteRecs.length > 0) {
+                        wasteRecs.sort((a, b) => b.co2Saved - a.co2Saved);
+                        recommendedAction = wasteRecs[0];
+                    } else {
+                        uncompleted.sort((a, b) => b.co2Saved - a.co2Saved);
+                        recommendedAction = uncompleted[0];
+                    }
+                } else {
+                    recommendedAction = uncompleted[0];
+                }
+            }
+            
+            if (recommendedAction) {
+                reply = `Based on your goal to **${goal.replace('-', ' ')}**, here is the best action you can take next:\n\n`;
+                reply += `${recommendedAction.icon} **${recommendedAction.title}** (${recommendedAction.difficulty} difficulty)\n`;
+                reply += `${recommendedAction.desc}\n\n`;
+                reply += `- 🌿 **Expected Carbon Cut:** ${recommendedAction.co2Saved} kg CO₂/yr\n`;
+                reply += `- 💰 **Expected Dollars Saved:** $${recommendedAction.moneySaved}/yr\n\n`;
+                reply += `You can commit to this in the **Action Hub** tab to earn +5 points!`;
+                
+                suggestions = ["What should I do next?", "Show my footprint summary", "How to save water"];
+                return { reply, suggestions };
+            } else {
+                reply = `🎉 **Amazing!** You have completed all recommendations in the Action Hub. You are a true Sustainability Champion!`;
+                suggestions = ["Show my footprint summary", "Water-saving hacks", "Ways to reduce electric bill"];
+                return { reply, suggestions };
+            }
+        }
+
         // Check for analytics trigger
         if (query.includes('footprint') || query.includes('how am i') || query.includes('summary') || query.includes('report') || query.includes('status')) {
             const weekly = dataStore.getWeeklyAverages();

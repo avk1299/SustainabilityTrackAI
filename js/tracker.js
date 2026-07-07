@@ -16,7 +16,7 @@ class TrackerController {
     }
 
     setupFormTabs() {
-        const tabs = document.querySelectorAll('.tracker-form-tabs btn-tab');
+        const tabs = document.querySelectorAll('.tracker-form-tabs .btn-tab');
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabs.forEach(t => t.classList.remove('active'));
