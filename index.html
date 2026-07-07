@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SustainTrack - AI Sustainability Companion</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="app-layout">
         <!-- Sidebar Navigation -->
@@ -20,7 +24,7 @@
                     <span class="badge-ai">AI Companion</span>
                 </div>
             </div>
-            
+
             <nav class="nav-menu">
                 <ul class="nav-menu-list">
                     <li class="active" data-tab="dashboard" id="nav-btn-dashboard">
@@ -45,7 +49,7 @@
                     </li>
                 </ul>
             </nav>
-            
+
             <div class="sidebar-footer">
                 <div class="profile-card" id="sidebar-profile-card">
                     <div class="profile-avatar">🌱</div>
@@ -64,7 +68,8 @@
                 <header class="view-header">
                     <div>
                         <h2>Welcome Back, <span id="dashboard-welcome-name">Explorer</span>!</h2>
-                        <p class="subtitle">Here is a continuous digest of your ecological footprints and utility savings.</p>
+                        <p class="subtitle">Here is a continuous digest of your ecological footprints and utility
+                            savings.</p>
                     </div>
                 </header>
 
@@ -83,7 +88,8 @@
                         </div>
                         <div class="score-summary">
                             <h3>Sustainability Standing</h3>
-                            <p>Based on your logged habits, your resource consumption compared to standard sustainable guidelines is:</p>
+                            <p>Based on your logged habits, your resource consumption compared to standard sustainable
+                                guidelines is:</p>
                             <span class="status-badge" id="sustainability-status">Sustainable Citizen</span>
                         </div>
                     </div>
@@ -95,7 +101,8 @@
                             <span class="metric-icon">🌿</span>
                         </div>
                         <div class="metric-value" id="dash-carbon-today">0.0 kg</div>
-                        <div class="metric-comparison">Weekly average: <strong id="dash-carbon-weekly">8.2 kg/day</strong></div>
+                        <div class="metric-comparison">Weekly average: <strong id="dash-carbon-weekly">8.2
+                                kg/day</strong></div>
                     </div>
 
                     <div class="grid-card metric-card card-cost">
@@ -104,7 +111,8 @@
                             <span class="metric-icon">💰</span>
                         </div>
                         <div class="metric-value" id="dash-cost-today">$0.00</div>
-                        <div class="metric-comparison">Weekly average: <strong id="dash-cost-weekly">$25.10/wk</strong></div>
+                        <div class="metric-comparison">Weekly average: <strong id="dash-cost-weekly">$25.10/wk</strong>
+                        </div>
                     </div>
 
                     <div class="grid-card metric-card card-water">
@@ -113,7 +121,8 @@
                             <span class="metric-icon">💧</span>
                         </div>
                         <div class="metric-value" id="dash-water-today">0 L</div>
-                        <div class="metric-comparison">Weekly average: <strong id="dash-water-weekly">165 L/day</strong></div>
+                        <div class="metric-comparison">Weekly average: <strong id="dash-water-weekly">165 L/day</strong>
+                        </div>
                     </div>
 
                     <div class="grid-card metric-card card-elec">
@@ -122,7 +131,8 @@
                             <span class="metric-icon">⚡</span>
                         </div>
                         <div class="metric-value" id="dash-elec-today">0.0 kWh</div>
-                        <div class="metric-comparison">Weekly average: <strong id="dash-elec-weekly">11.4 kWh/day</strong></div>
+                        <div class="metric-comparison">Weekly average: <strong id="dash-elec-weekly">11.4
+                                kWh/day</strong></div>
                     </div>
 
                     <!-- Charts Visualization -->
@@ -153,7 +163,7 @@
                                 <div class="ring-percentage" id="ring-elec-text">80%</div>
                                 <span class="ring-label">Electricity</span>
                             </div>
-                            
+
                             <div class="ring-metric">
                                 <svg viewBox="0 0 80 80">
                                     <circle class="ring-bg" cx="40" cy="40" r="36"></circle>
@@ -198,7 +208,8 @@
             <section class="app-view-panel" id="view-tracker">
                 <header class="view-header">
                     <h2>Track Daily Habits</h2>
-                    <p class="subtitle">Continuously log energy, water, waste, and transport choices to track daily environmental impact.</p>
+                    <p class="subtitle">Continuously log energy, water, waste, and transport choices to track daily
+                        environmental impact.</p>
                 </header>
 
                 <div class="tracker-layout">
@@ -209,7 +220,7 @@
                             <button class="btn-tab" data-category="waste">🗑️ Waste</button>
                             <button class="btn-tab" data-category="transport">🚗 Transport</button>
                         </div>
-                        
+
                         <form id="habit-log-form" class="tracker-form">
                             <div class="form-group inline-row">
                                 <div class="flex-item">
@@ -240,7 +251,9 @@
                             </div>
                         </div>
                         <div class="preview-infobox">
-                            <p>🍃 <strong>Why this matters:</strong> Every entry is logged into your weekly profile. The AI agent evaluates these figures to curate optimization advices and compute your Sustainability Score.</p>
+                            <p>🍃 <strong>Why this matters:</strong> Every entry is logged into your weekly profile. The
+                                AI agent evaluates these figures to curate optimization advices and compute your
+                                Sustainability Score.</p>
                         </div>
                     </div>
                 </div>
@@ -250,7 +263,8 @@
             <section class="app-view-panel" id="view-recommendations">
                 <header class="view-header">
                     <h2>Action Hub & Recommendations</h2>
-                    <p class="subtitle">Accept actions to optimize your utility savings and shrink your global carbon footprint.</p>
+                    <p class="subtitle">Accept actions to optimize your utility savings and shrink your global carbon
+                        footprint.</p>
                 </header>
 
                 <div class="recommendations-grid-layout" id="recommendations-grid">
@@ -262,14 +276,15 @@
             <section class="app-view-panel" id="view-simulator">
                 <header class="view-header">
                     <h2>"What-If" Ecological Simulator</h2>
-                    <p class="subtitle">Adjust sliders to model lifestyle adjustments and discover the annual compound savings.</p>
+                    <p class="subtitle">Adjust sliders to model lifestyle adjustments and discover the annual compound
+                        savings.</p>
                 </header>
 
                 <div class="simulator-layout">
                     <!-- Sliders controls -->
                     <div class="simulator-panel-card">
                         <h3>Model Lifestyle Choices</h3>
-                        
+
                         <div class="simulator-control">
                             <div class="control-header">
                                 <label for="sim-heating">Home Heating Type</label>
@@ -287,7 +302,8 @@
                                 <label for="sim-shower">Average Shower Duration</label>
                                 <span class="control-val-tag" id="sim-shower-val">10 min</span>
                             </div>
-                            <input type="range" id="sim-shower" min="3" max="15" value="10" step="1" class="slider-range">
+                            <input type="range" id="sim-shower" min="3" max="15" value="10" step="1"
+                                class="slider-range">
                         </div>
 
                         <div class="simulator-control">
@@ -295,7 +311,8 @@
                                 <label for="sim-lights">Lighting Setup</label>
                                 <span class="control-val-tag" id="sim-lights-val">0% LED</span>
                             </div>
-                            <input type="range" id="sim-lights" min="0" max="100" value="0" step="10" class="slider-range">
+                            <input type="range" id="sim-lights" min="0" max="100" value="0" step="10"
+                                class="slider-range">
                         </div>
 
                         <div class="simulator-control">
@@ -303,7 +320,8 @@
                                 <label for="sim-travel">Daily Travel Mileage</label>
                                 <span class="control-val-tag" id="sim-travel-val">20 mi/day</span>
                             </div>
-                            <input type="range" id="sim-travel" min="0" max="80" value="20" step="5" class="slider-range">
+                            <input type="range" id="sim-travel" min="0" max="80" value="20" step="5"
+                                class="slider-range">
                         </div>
 
                         <div class="simulator-control">
@@ -335,7 +353,8 @@
                                 <span class="sim-lbl">Annual Carbon Cut</span>
                                 <span class="sim-val" id="sim-co2-saved">0 kg</span>
                                 <div class="sim-progress-bg">
-                                    <div class="sim-progress-fill bg-emerald" id="sim-carbon-progress-bar" style="width: 0%"></div>
+                                    <div class="sim-progress-fill bg-emerald" id="sim-carbon-progress-bar"
+                                        style="width: 0%"></div>
                                 </div>
                             </div>
 
@@ -343,7 +362,8 @@
                                 <span class="sim-lbl">Annual Dollars Saved</span>
                                 <span class="sim-val" id="sim-cost-saved">$0</span>
                                 <div class="sim-progress-bg">
-                                    <div class="sim-progress-fill bg-cash" id="sim-cost-progress-bar" style="width: 0%"></div>
+                                    <div class="sim-progress-fill bg-cash" id="sim-cost-progress-bar" style="width: 0%">
+                                    </div>
                                 </div>
                             </div>
 
@@ -357,7 +377,8 @@
                             <div class="analogy-icon">🌳</div>
                             <div class="analogy-text">
                                 <h4>Carbon Sink Analogy</h4>
-                                <p>Your choices offset emissions equal to planting <strong id="sim-trees-planted">0</strong> mature pine trees annually.</p>
+                                <p>Your choices offset emissions equal to planting <strong
+                                        id="sim-trees-planted">0</strong> mature pine trees annually.</p>
                             </div>
                         </div>
 
@@ -375,7 +396,8 @@
                     <div class="flex-header-row">
                         <div>
                             <h2>Ask Sustaina (AI Companion)</h2>
-                            <p class="subtitle">Get contextual advice, footprint reports, and live sustainability tips.</p>
+                            <p class="subtitle">Get contextual advice, footprint reports, and live sustainability tips.
+                            </p>
                         </div>
                         <button class="btn btn-outline" id="clear-chat-btn">Clear Chat History</button>
                     </div>
@@ -389,14 +411,16 @@
 
                     <!-- Input Section -->
                     <div class="chat-input-bar">
-                        <input type="text" id="chat-input-box" placeholder="Ask Sustaina (e.g. 'How can I save water?' or 'Analyze my profile')..." class="form-input chat-input">
+                        <input type="text" id="chat-input-box"
+                            placeholder="Ask Sustaina (e.g. 'How can I save water?' or 'Analyze my profile')..."
+                            class="form-input chat-input">
                         <button class="btn btn-primary chat-btn-send" id="chat-send-btn">Send</button>
                     </div>
                 </div>
             </section>
         </main>
     </div>
-    
+
     <!-- Profile Settings Modal -->
     <div id="profile-modal" class="modal-overlay">
         <div class="modal-content">
@@ -434,4 +458,5 @@
     <script src="js/simulator.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
